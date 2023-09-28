@@ -1,0 +1,92 @@
+/* Elaborar um algoritmo (pequeno sistema) envolvendo os conteúdos abordados nas aulas anteriores com o objetivo de propor uma solução para um problema real.
+
+Pode ser no contexto de uma farmácia, locadora, itens de um mercado ou outro.
+
+O algoritmo deverá envolver funcionalidades envolvendo: variáveis, funções IF, Case, enquanto.
+
+O algoritmo deverá pedir algumas informações de entrada ao usuário, realizar processamentos e entregar respostas.
+*/
+
+//Algoritmo de Estoque
+
+const prompt = require ('prompt-read')
+
+console.clear()
+
+const estoque = {};
+
+function adicionarProduto(){
+    const nomeProduto = prompt("NOME DO PRODUTO: ")
+    const quantidadeProduto = parseInt(prompt("ADICIONAR QUANTIDADE AO ESTOQUE: "))
+    const precoProduto = parseFloat(prompt("PREÇO PRODUTO: "))
+    estoque[nomeProduto] = { quantidadeProduto, precoProduto }
+    console.log(`${nomeProduto}, foi adicionado ao estoque`)
+}
+
+function atualizarProduto(){
+    const nomeProduto = prompt('DIGITE O NOME DO PRODUTO QUE DESEJA ATUALIZAR: ')
+    if(estoque[nomeProduto]){
+        const novaQuantidade = parseInt(prompt('Digite a nova quantidade em estoque: '))
+        const novoPreco= parseFloat(prompt('Digite o novo preço do produto: '))
+        estoque[nomeProduto].quantidadeProduto = novaQuantidade;
+        estoque[nomeProduto].precoProduto = novoPreco;
+        console.log(`As informações de ${nomeProduto} foram atualizadas.`)
+    }else{
+        console.log(`${nomeProduto} não encontrado no estoque.`)
+    }
+}
+
+function verificarEstoque (){
+    const nomeProduto = prompt("DIGITE O NOME DO PRODUTO[VERIFICAÇÃO]: ")
+        if(estoque[nomeProduto]){
+
+            const quantidadeProduto = estoque[nomeProduto].quantidadeProduto
+            console.log(`${nomeProduto} possui ${quantidadeProduto} unidades em estoque`)
+        }else{
+            console.log(`${nomeProduto} não escontrado no estoque`)
+        }
+}
+
+function excluirProduto(){
+    const nomeProduto = prompt('DIGITE O NOME DO PRODUTO QUE DESEJA EXCLUIR: ')
+    if (estoque [nomeProduto]) {
+        delete estoque [nomeProduto];
+        console.log(`${nomeProduto} foi removido com sucesso!`);
+    } else{
+        console.log(`${nomeProduto} não encontrado no estoque.`)
+    }
+}
+while (true) {
+    console.log("\n** Farmácia XYZ - Controle de Estoque **");
+    console.log("1. Adicionar Produto");
+    console.log("2. Atualizar Produto");
+    console.log("3. Verificar Estoque");
+    console.log("4. Excluir Produto");
+    console.log("5. Sair");
+
+    const opcao = prompt("Escolha uma opção: ", 'number');
+
+
+
+switch (opcao) {
+    case 1: 
+        adicionarProduto()
+        break;
+    case 2: 
+        atualizarProduto()
+        break;
+    case 3:
+        verificarEstoque()
+        break;
+    case 4:
+        excluirProduto()
+        break;
+    case 5:
+        console.log('Encerrando o programa. ')
+        return;
+    default:
+        console.log('Opção inválida. Por favor digite uma opção válida.')
+}
+
+
+}
